@@ -1,0 +1,5 @@
+#! /bin/sh
+i3-msg "append_layout ~/etc/i3ide.json"
+i3-msg "exec chromium-browser"
+sleep 2
+i3-msg "exec gnome-terminal -x 'sh' -c 'vim ~/wk' --window-with-profile='big_text' --hide-menubar && gnome-terminal --window-with-profile='small_text' --hide-menubar && gvim ~/wk"
