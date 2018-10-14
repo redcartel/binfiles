@@ -1,2 +1,2 @@
 #! /bin/sh
-vim -u ~/dotfiles/vim/vim-gvimtree.vim $@
+vim -u ~/dotfiles/vim/gvimtreerc.vim $@
