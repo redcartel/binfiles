@@ -3,10 +3,13 @@
 if [ $1 = "mirror" ] 
 then
     xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080 --same-as eDP-1
+elif [ $1 = "1080p" ]
+then
+    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 1920x1080
 elif [ $1 = "laptop" ]
 then
-    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --off --output DP-1-2 off
+    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --off
 elif [ $1 = "big" ]
 then
-    xrandr --output eDP-1 --mode 1920x1080 --output DP-1-2 --mode 2560x1440 --left-of eDP-1
+    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-2 --mode 2560x1440 --left-of eDP-1
 fi
