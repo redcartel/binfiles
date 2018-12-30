@@ -8,9 +8,10 @@ alias python=python3
 alias pip=pip3
 alias virtualenv='python3 -m virtualenv'
 alias venv='source *venv*/bin/activate'
+alias suds='history | grep "sudo apt" | grep "install" | grep -v "grep"'
 
 alias cdwk='cd $(readlink ~/wk)'
-alias wk='rm -f ~/wk && ln -s $(pwd -P) ~/wk'
+alias wk='rm -f ~/wk && ln -s $(pwd -P) ~/wk && echo "$(pwd -P)" >> ~/var/log/wk.log'
 
 alias cdw2='cd $(readlink ~/w/w2)'
 alias w2='rm -f ~/w/w2 && ln -s $(pwd -P) ~/w/w2'
@@ -35,3 +36,4 @@ alias w8='rm -f ~/w/w8 && ln -s $(pwd -P) ~/w/w8'
 
 alias cdw9='cd $(readlink ~/w/w9)'
 alias w9='rm -f ~/w/w9 && ln -s $(pwd -P) ~/w/w9'
+alias ctree='tree -C -L 3 | less -R'
