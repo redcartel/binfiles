@@ -1,39 +1,27 @@
 # source ~/bin/alias.sh  # copy to .bashrc and .zshrc
 
-PATH="/home/redcartel/bin:$(yarn global bin):$PATH"
+export PATH="/home/redcartel/binfiles:/home/redcartel/.local/bin:/home/redcartel/installfiles/:$PATH"
 
 mkdir -p ~/w
 
 alias python=python3
 alias pip=pip3
 alias virtualenv='python3 -m virtualenv'
-alias venv='source *venv*/bin/activate'
+alias venv='if [ ! -d "venv" ]; then virtualenv venv; source venv/bin/activate; elif [ -z "$VIRTUAL_ENV" ]; then source venv/bin/activate; else deactivate; fi'
 alias suds='history | grep "sudo apt" | grep "install" | grep -v "grep"'
 
-alias cdwk='cd $(readlink ~/wk)'
 alias wk='rm -f ~/wk && ln -s $(pwd -P) ~/wk && echo "$(pwd -P)" >> ~/var/log/wk.log'
+alias cdwk='cd $(readlink ~/wk)'
 
-alias cdw2='cd $(readlink ~/w/w2)'
-alias w2='rm -f ~/w/w2 && ln -s $(pwd -P) ~/w/w2'
+alias w1='cd $(_cdwn.sh 1)'
+alias w2='cd $(_cdwn.sh 2)'
+alias w3='cd $(_cdwn.sh 3)'
+alias w4='cd $(_cdwn.sh 4)'
+alias w5='cd $(_cdwn.sh 5)'
+alias w6='cd $(_cdwn.sh 6)'
+alias w7='cd $(_cdwn.sh 7)'
+alias w8='cd $(_cdwn.sh 8)'
+alias w9='cd $(_cdwn.sh 9)'
 
-alias cdw3='cd $(readlink ~/w/w3)'
-alias w3='rm -f ~/w/w3 && ln -s $(pwd -P) ~/w/w3'
-
-alias cdw4='cd $(readlink ~/w/w4)'
-alias w4='rm -f ~/w/w4 && ln -s $(pwd -P) ~/w/w4'
-
-alias cdw5='cd $(readlink ~/w/w5)'
-alias w5='rm -f ~/w/w5 && ln -s $(pwd -P) ~/w/w5'
-
-alias cdw6='cd $(readlink ~/w/w6)'
-alias w6='rm -f ~/w/w6 && ln -s $(pwd -P) ~/w/w6'
-
-alias cdw7='cd $(readlink ~/w/w7)'
-alias w7='rm -f ~/w/w7 && ln -s $(pwd -P) ~/w/w7'
-
-alias cdw8='cd $(readlink ~/w/w8)'
-alias w8='rm -f ~/w/w8 && ln -s $(pwd -P) ~/w/w8'
-
-alias cdw9='cd $(readlink ~/w/w9)'
-alias w9='rm -f ~/w/w9 && ln -s $(pwd -P) ~/w/w9'
-alias ctree='tree -C -L 3 | less -R'
+alias tdn='vim ~/etc/todo-now.txt'
+alias tdt='vim ~/etc/todo-then.txt'
