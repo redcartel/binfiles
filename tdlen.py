@@ -1,16 +1,25 @@
 #! /usr/bin/python3
 """ Display a line count for to-do files for use in an enhanced zsh prompt """
 import os
-from sty import fg
+from sys import argv
 from functools import reduce
 
 FILES = ['todo-life.txt', 'todo-then.txt', 'todo-now.txt']
 DIR = "etc"
-COLOR_THRESHOLDS = [(6, fg(197)), (3, fg(208)), (1, fg.black), (0, fg.green)]
 ZERO = '\u2713'
 
 BASEPATH = os.path.join(os.path.expanduser('~'), DIR)
 FILEPATHS = [os.path.join(BASEPATH, filename) for filename in FILES]
+
+
+def fgcolor(num):
+    return "\x1b[38;5;{}m".format(num)
+
+
+COLOR_THRESHOLDS = [(6, fgcolor(197)), (3, fgcolor(208)), (1, fgcolor(0)),
+                    (0, fgcolor(154))]
+BLACK = fgcolor(0)
+CLEAR = "\x1b[0m"
 
 
 def lines_in_file(filename):
@@ -23,21 +32,27 @@ def lines_in_file(filename):
 
 
 def colored(num, color=True):
+    if not color:
+        if num == 0:
+            return ZERO
+        return str(num)
+
     if num == 0:
         string = ZERO
     else:
         string = str(num)
 
-    if color:
-        for threshold in COLOR_THRESHOLDS:
-            if num >= threshold[0]:
-                return threshold[1] + string
-
-    return string
+    if not isinstance(num, int):
+        return BLACK + str(num)
+    for threshold in COLOR_THRESHOLDS:
+        if num >= threshold[0]:
+            return threshold[1] + string
 
 
 if __name__ == '__main__':
-    output = (fg.black + ",").join(
-        colored(lines_in_file(filename)) for filename in FILEPATHS)
-
-    print(output, end='')
+    color = True
+    if "no" in argv:
+        color = False
+    output = (colored(",", color)).join(
+        colored(lines_in_file(filename), color) for filename in FILEPATHS)
+    print(output + fgcolor(16))

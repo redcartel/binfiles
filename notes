@@ -1,3 +1,2 @@
 #! /bin/sh
-
-gvim ~/Documents/NOTES/"NOTE$(date +%y.%m.%d).md"
+gvim $HOME/Documents/NOTES/"NOTE$(date +%y.%m.%d).md"
