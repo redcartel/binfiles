@@ -21,4 +21,7 @@ then
 elif [ $1 = "dock" ]
 then
     xrandr --output eDP-1 --off --output DP-1-2 --mode 2560x1440
+elif [ $1 = "--help" ]
+then
+    echo "mirror\n1080p\n1080p-left\nlaptop\nbig\nonly-big\ndock\n--help\n"
 fi

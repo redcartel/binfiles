@@ -1,0 +1,5 @@
+#! /bin/sh
+
+DATE="$(date +%y.%m.%d)"
+mkdir ~/cdrive/Today/bak/$DATE
+mv ~/cdrive/Today/*.* ~/cdrive/Today/.*.* ~/cdrive/Today/bak/$DATE 2> /dev/null

@@ -1,0 +1,6 @@
+#! /bin/sh
+
+tree -f -a | \
+    egrep -v "(\.pyc)|(\/venv\/)|(__pycache__)|(\.git\/)" | \
+    sed -e "s/\.\/.*\///" | \
+    sed -e "s/\.\///"

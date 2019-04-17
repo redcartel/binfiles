@@ -1,0 +1,4 @@
+#! /bin/bash
+
+echo "nuclear option activated"
+rm -r `cleanlist.sh | xargs`
