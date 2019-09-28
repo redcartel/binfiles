@@ -1,2 +1,0 @@
-#! /bin/sh
-echo "$(cat ~/etc/bak)" "/var/bak" | xargs cp -r 

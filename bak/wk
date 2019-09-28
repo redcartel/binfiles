@@ -1,4 +1,0 @@
-#! /bin/sh
-
-rm -f ~/wk
-ln -s $(pwd -P) ~/wk

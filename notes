@@ -1,2 +1,17 @@
 #! /bin/sh
-gvim $HOME/Documents/NOTES/"NOTE$(date +%y.%m.%d).md"
+DATESTRING="$(date +%y.%m.%d)"
+FRIENDLYDATESTRING=`date "+%A %B %d %Y"`
+FILENAME="$HOME/Documents/NOTES/NOTE$DATESTRING.md"
+
+if [ ! -f $FILENAME ]
+then
+    echo "\` - = - = - = - = - = - = - = - = - = - =\`" > $FILENAME
+    echo "## Notes for $FRIENDLYDATESTRING:" >> $FILENAME
+    :q
+fi
+
+echo >> $FILENAME
+echo "$(date +%r)" >> $FILENAME
+echo "===========" >> $FILENAME
+echo >> $FILENAME 
+gvim -c "startinsert" + $FILENAME

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-rm -rfd ~/tmp/* ~/tmp/.*
-rm -rfd ~/Downloads/* ~/Downloads/.*
-rm -rfd ~/snap/spotify/common/.cache/spotify/Data/*

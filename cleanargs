@@ -1,6 +1,6 @@
 #! /bin/bash
 
 find . | \
-    egrep "(/__pycache__$)|(/venv$)|(/_MACOSX$)|(node_modules$)" | \
+    egrep "(/.git$)|(/__pycache__$)|(/venv$)|(/__MACOSX$)|(node_modules$)" | \
     egrep -v "/venv/.+" | \
     xargs

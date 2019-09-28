@@ -1,0 +1,3 @@
+#! /bin/bash
+
+vim $HOME/Documents/TODO.md
