@@ -25,6 +25,8 @@ alias w7='cd "$(_cdwn.sh 7)"'
 alias w8='cd "$(_cdwn.sh 8)"'
 alias w9='cd "$(_cdwn.sh 9)"'
 
+alias cds='cd "$HOME/cdrive/Students"'
+
 alias ducksa='du -cks -BM * .??* | sort -rn | head'
 alias ducks='du -cks -BM * | sort -rn | head'
 # alias tdn='vim ~/etc/todo-now.txt'
@@ -55,4 +57,20 @@ hpurge() {
 # rewrite .bash_history with current session history
 hrebuild() {
     cat history > ~/.bash_history
+}
+
+cdt() {
+    mkdir -p `td`
+    rm -f ~/td
+    ln -s `td` $HOME/td
+    cd `td`
+}
+
+td() {
+    DIR=$HOME/Today/`bytedate -p`-cohort/`bytedate -r`
+    echo $DIR
+}
+
+ok() {
+    echo "ok"
 }

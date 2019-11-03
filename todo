@@ -1,3 +1,4 @@
 #! /bin/bash
 
-vim $HOME/Documents/TODO.md
+#vim $HOME/Documents/TODO.md
+nohup libreoffice $HOME/Documents/TODO.odt & 2> /dev/null

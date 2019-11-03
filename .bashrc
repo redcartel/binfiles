@@ -115,4 +115,12 @@ if [ -f $HOME/binfiles/bash_prompt.sh ]; then
     . $HOME/binfiles/bash_prompt.sh
 fi
 
+rm -f "$HOME/td"
+ln -s `td` "$HOME/td"
+
 export FLASK_DEBUG=1
+
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+cdt
+cd "`cat ~/.current_dir`"

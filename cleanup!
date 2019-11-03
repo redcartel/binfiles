@@ -1,4 +1,0 @@
-#! /bin/bash
-
-PYCACHE=$(find . | egrep "/__pycache__$" | xargs)
-echo $PYCACHE

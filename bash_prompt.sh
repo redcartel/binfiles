@@ -104,8 +104,9 @@ function set_bash_prompt () {
 
   # Set the bash prompt variable.
   # 
+  echo "`pwd -P`" > ~/.current_dir
   PS1="${PYTHON_VIRTUALENV}${GREEN}\w${COLOR_NONE}${BRANCH}
-$TODO\! ${PROMPT_SYMBOL} "
+$TODO\! ${PROMPT_SYMBOL}"
 }
 
 # multiple terminals add their commands to bash_history
