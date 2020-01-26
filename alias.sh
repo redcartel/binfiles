@@ -5,12 +5,12 @@
 # alias virtualenv='python3 -m virtualenv'
 # alias venv='if [ ! -d "venv" ]; then virtualenv venv; source venv/bin/activate; elif [ -z "$VIRTUAL_ENV" ]; then source venv/bin/activate; else deactivate; fi'
 
-alias ducksa='du -cks -BM * .??* | sort -rn | head -n 24'
+alias ducksa='du -cks -BM * .[!.]* | sort -rn | head -n 24'
 alias ducks='du -cks -BM * | sort -rn | head -n 24'
 alias ":q"=exit
+alias ":e"='vim'
 alias "o"=xdg-open
 alias "open"=xdg-open
-
 
 ######### "Working Directory" Commands ###########
 
@@ -44,19 +44,6 @@ w() {
         cd "$DIR"
     fi
 }
-
-#alias w1='cd "$(_cdwn.sh 1)"'
-#alias w2='cd "$(_cdwn.sh 2)"'
-#alias w3='cd "$(_cdwn.sh 3)"'
-#alias w4='cd "$(_cdwn.sh 4)"'
-#alias w5='cd "$(_cdwn.sh 5)"'
-#alias w6='cd "$(_cdwn.sh 6)"'
-#alias w7='cd "$(_cdwn.sh 7)"'
-#alias w8='cd "$(_cdwn.sh 8)"'
-#alias w9='cd "$(_cdwn.sh 9)"'
-
-
-
 
 #### HISTORY FUNCTIONS ####
 
@@ -112,11 +99,9 @@ venv() {
     # if active, deactivate
     if [ -z "$VIRTUAL_ENV" ]; then 
         if [ ! -d "venv" ]; then
-            virtualenv --system-site-packages venv
-            source venv/bin/activate;
-        else
-            source venv/bin/activate
+            virtualenv venv
         fi
+        source venv/bin/activate
     else
         deactivate
     fi
@@ -124,4 +109,3 @@ venv() {
 
 ##### simple aliases
 
-alias :e='vim '

@@ -1,6 +1,0 @@
-#! /bin/bash
-
-find . | \
-    egrep "(/.git$)|(/__pycache__$)|(/venv$)|(/__MACOSX$)|(node_modules$)" | \
-    egrep -v "/venv/.+" | \
-    xargs
