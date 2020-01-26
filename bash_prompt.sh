@@ -36,12 +36,16 @@ LIGHT_GREEN="\[\033[1;32m\]"
 
 # determine git branch name
 function parse_git_branch(){
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+function set_title(){
+  echo -en "\e]2;$(pwd)\a"
 }
 
 # determine mercurial branch name
 function parse_hg_branch(){
-  hg branch 2> /dev/null | awk '{print " (" $1 ")"}'
+  hg branch 2> /dev/null | awk '{print "(" $1 ")"}'
 }
 
 # Determine the branch/state information for this git repository.
@@ -73,18 +77,19 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
       PYTHON_VIRTUALENV=""
   else
-      PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+      PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE}"
   fi
 }
 
-# show how many lines long my todolist file is
-function set_todo () {
-    TODOFILE="$HOME/Documents/TODO.md"
-    if [ -f $TODOFILE ] ; then
-        TODO=" ($(cat $TODOFILE | wc -l)) "
-    else
-        TODO=""
-    fi
+function echo_todo () {
+  CURDIR="$(pwd)"
+  OLDDIR="$(tail -n 1 ~/.current_dir)"
+  if test $CURDIR != $OLDDIR && test -f TODO.md; then
+      echo ""
+      echo "==== TODO.md ===="
+      cat TODO.md
+      echo ""
+  fi
 }
 
 # Set the full bash prompt.
@@ -99,16 +104,33 @@ function set_bash_prompt () {
   # Set the BRANCH variable.
   set_git_branch
 
-  # Set the TODO variable
-  set_todo
+  # Set the title in a gui terminal 
+  set_title
 
-  # Set the bash prompt variable.
-  # 
-  echo "`pwd -P`" > ~/.current_dir
-  PS1="${PYTHON_VIRTUALENV}${GREEN}\w${COLOR_NONE}${BRANCH}
-$TODO\! ${PROMPT_SYMBOL}"
+  # if entering a directory for the first time & TODO.md exists, print it
+  echo_todo
+  
+  # replace the contents of .current_dir with the current path
+  echo "`pwd`" > ~/.current_dir
+  
+  GREENPATH="${GREEN}\w${COLOR_NONE}"
+
+  PS1="${PYTHON_VIRTUALENV}${GREENPATH} ${BRANCH}
+\! ${PROMPT_SYMBOL} "
 }
 
 # multiple terminals add their commands to bash_history
 # see hupdate in alias.sh for func that loads current history into a running terminal
 PROMPT_COMMAND="history -a; set_bash_prompt;"
+
+# after creating these definitions (typically when the terminal opens) change
+# to the last directory from the most recent terminal session
+#
+# I keep most of my 
+if [ -f ~/.current_dir ]; then
+    DIR="$(tail -n 1 ~/.current_dir)"
+    DIR=`echo $DIR | sed -e "s/~\\/Dropbox\\/Home\\//~\\//"`
+    if [ -d $DIR ]; then
+        cd "$DIR"
+    fi
+fi

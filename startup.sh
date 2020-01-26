@@ -1,0 +1,4 @@
+#! /bin/bash
+
+rbg
+dboxstart
