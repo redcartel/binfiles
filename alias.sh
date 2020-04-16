@@ -8,9 +8,16 @@
 alias ducksa='du -cks -BM * .[!.]* | sort -rn | head -n 24'
 alias ducks='du -cks -BM * | sort -rn | head -n 24'
 alias ":q"=exit
-alias ":e"='vim'
 alias "o"=xdg-open
 alias "open"=xdg-open
+alias i3config="vim ~/.config/i3/config"
+
+######### Launch nohup with no nohup.out #########
+
+no() {
+	# launch a command as a detached process. nohup.out is /tmp/no.out
+    nohup &> /tmp/no.out $@ &
+}
 
 ######### "Working Directory" Commands ###########
 
@@ -30,12 +37,17 @@ cdwk() {
 #alias wk='rm -f ~/wk && ln -s "$(pwd)" ~/wk && echo "$(pwd)" >> ~/var/log/wk.log'
 #alias cdwk='cd "$(readlink ~/wk)"'
 
-wd() {
+lswk() {
+    if [ -z "$1" ]; then
+        N=10
+    else
+        N=$!
+    fi
     # outputs the nth most recent directory logged by wk
-    tail -n $1 ~/var/log/wk.log | head -n 1
+    tail -n $N ~/var/log/wk.log | head -n 1
 }
 
-w() {
+cdw() {
     # moves into the nth most recent directory logged by wk
     if [ -z $1 ]; then
         cdwk
@@ -71,10 +83,6 @@ hrebuild() {
     history > ~/.bash_history
 }
 
-:q() {
-    echo "ok"
-}
-
 ########## Today Folders #####################################################
 
 cdt() {
@@ -107,5 +115,4 @@ venv() {
     fi
 }
 
-##### simple aliases
-
+source $HOME/bin/bash_prompt.sh

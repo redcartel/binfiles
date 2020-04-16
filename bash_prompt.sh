@@ -24,14 +24,18 @@
 
 # The various escape codes that we can use to color our prompt.
         RED="\[\033[0;31m\]"
+  LIGHT_RED="\[\033[1;31m\]"
      YELLOW="\[\033[1;33m\]"
       GREEN="\[\033[0;32m\]"
-       BLUE="\[\033[1;34m\]"
-     PURPLE="\[\033[0;35m\]"
-  LIGHT_RED="\[\033[1;31m\]"
 LIGHT_GREEN="\[\033[1;32m\]"
-      WHITE="\[\033[1;37m\]"
+       BLUE="\[\033[0;34m\]"
+LIGHT_BLUE="\[\033[1;34m\]"
+     PURPLE="\[\033[0;35m\]"
+	 LIGHT_PURPLE="\[\033[1;35m\]"
+	 CYAN="\[\033[\033[0;36m\]"
+LIGHT_CYAN="\[\033[\033[1;36m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
+      WHITE="\[\033[1;37m\]"
  COLOR_NONE="\[\e[0m\]"
 
 # determine git branch name
@@ -84,7 +88,7 @@ function set_virtualenv () {
 function echo_todo () {
   CURDIR="$(pwd)"
   OLDDIR="$(tail -n 1 ~/.current_dir)"
-  if test $CURDIR != $OLDDIR && test -f TODO.md; then
+  if test "$CURDIR" != "$OLDDIR" && test -f TODO.md; then
       echo ""
       echo "==== TODO.md ===="
       cat TODO.md
@@ -113,7 +117,7 @@ function set_bash_prompt () {
   # replace the contents of .current_dir with the current path
   echo "`pwd`" > ~/.current_dir
   
-  GREENPATH="${GREEN}\w${COLOR_NONE}"
+  GREENPATH="${LIGHT_CYAN}\w${COLOR_NONE}"
 
   PS1="${PYTHON_VIRTUALENV}${GREENPATH} ${BRANCH}
 \! ${PROMPT_SYMBOL} "
