@@ -1,0 +1,3 @@
+#! /bin/bash
+
+amixer set Capture Master 0
